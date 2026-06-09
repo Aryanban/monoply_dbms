@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monopoly Web Console</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="theme-admin">
+  <header class="topbar">
+    <h1>Monopoly Web Console</h1>
+    <div class="topbar-actions">
+      <label for="gameSelect">Game</label>
+      <select id="gameSelect"></select>
+      <button type="button" id="newGameBtn" class="btn-gold">+ New Game</button>
+      <button type="button" id="refreshBtn" class="btn-gold">Refresh</button>
+    </div>
+  </header>
+
+  <main class="app-layout">
+    <section class="board-section">
+      <aside class="outside-left">
+        <div class="pending-trades-panel" id="pendingTradesPanel">
+          <h4 class="pending-title">Pending trades</h4>
+          <p class="muted small" id="pendingTradesHint">Start a turn to see incoming offers.</p>
+          <div id="pendingTradesList" class="pending-trades-list"></div>
+        </div>
+      </aside>
+
+      <div class="board-frame" id="boardFrame">
+        <div id="board" class="board-grid"></div>
+        <div class="center-panel">
+          <h2>Player Actions</h2>
+          <p id="turnHint" class="muted">Start a player's turn from the Admin Hub.</p>
+          <div class="controls">
+            <button type="button" id="rollBtn" class="btn-gold" disabled>
+              <img src="/icons/dice-svgrepo-com.svg" alt="" class="btn-icon"> Roll
+            </button>
+            <button type="button" id="statsBtn" class="btn-gold" disabled>
+              <img src="/icons/stats-1370-svgrepo-com.svg" alt="" class="btn-icon"> Stats
+            </button>
+            <button type="button" id="tradeBtn" class="btn-gold" disabled>
+              <img src="/icons/swap-svgrepo-com.svg" alt="" class="btn-icon"> Trade
+            </button>
+            <button type="button" id="endTurnBtn" class="btn-gold" disabled>End Turn</button>
+          </div>
+          <div id="ownedPanel" class="owned-panel hidden"></div>
+          <div id="logBox" class="log-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <aside id="adminSidebar" class="admin-panel">
+      <h3>Admin Hub</h3>
+      <p id="readonlyBanner" class="pill">Read-only mode: {{ "ON" if read_only else "OFF" }}</p>
+
+      <div class="row">
+        <select id="playerSelect"></select>
+        <button type="button" id="startTurnBtn" class="btn-gold">Run Turn</button>
+      </div>
+      <button type="button" id="viewPlayersBtn" class="btn-gold">View Active Players</button>
+
+      <div class="admin-actions">
+        <button type="button" id="openAddPropertyBtn" class="btn-gold">Add New Property Space</button>
+        <button type="button" id="openAddSpecialBtn" class="btn-gold">Add New Action Boardspace</button>
+        <button type="button" id="demolishBtn" class="btn-gold">Demolish Existing Property</button>
+        <button type="button" id="resetBtn" class="btn-gold">Reset Game</button>
+        <button type="button" id="endGameBtn" class="danger">End Game</button>
+        <button type="button" id="deleteGameBtn" class="danger">Erase Game Data</button>
+      </div>
+    </aside>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-card" id="modalCard">
+      <h3 id="modalTitle">Modal</h3>
+      <div id="modalBody"></div>
+      <button type="button" id="closeModalBtn" class="btn-gold">Close</button>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
